@@ -33,26 +33,26 @@ var (
 	regenerate   = flag.Bool("regenerate", false, "regenerate files")
 	buildRelease = flag.Bool("buildRelease", false, "build release binaries")
 
-	protobufVersion = "27.0"
+	protobufVersion = "30.0"
 
 	golangVersions = func() []string {
 		// Version policy: oldest supported version of Go, plus the version before that.
 		// This matches the version policy of the Google Cloud Client Libraries:
 		// https://cloud.google.com/go/getting-started/supported-go-versions
 		return []string{
-			"1.20.14",
-			"1.21.10",
-			"1.22.3",
+			"1.22.12",
+			"1.23.6",
+			"1.24.0",
 		}
 	}()
 	golangLatest = golangVersions[len(golangVersions)-1]
 
-	staticcheckVersion = "2023.1.6"
+	staticcheckVersion = "2025.1"
 	staticcheckSHA256s = map[string]string{
-		"darwin/amd64": "b14a0cbd3c238713f5f9db41550893ea7d75d8d7822491c7f4e33e2fe43f6305",
-		"darwin/arm64": "f1c869abe6be2c6ab727dc9d6049766c947534766d71a1798c12a37526ea2b6f",
-		"linux/386":    "02859a7c44c7b5ab41a70d9b8107c01ab8d2c94075bae3d0b02157aff743ca42",
-		"linux/amd64":  "45337834da5dc7b8eff01cb6b3837e3759503cfbb8edf36b09e42f32bccb1f6e",
+		"darwin/amd64": "b9c82a0bdcf0bd7b5c46524d7e58323f17998b2e15ecacba608ac21be9fa345d",
+		"darwin/arm64": "1fc58b389de90e1e220fd23489dc685fc3e6435266f3c20c914f56a98f99844c",
+		"linux/386":    "58f7e465f7c15f70cea0b940e530826031d414b37ebdd40b073b2ca215171b42",
+		"linux/amd64":  "b0f4a46bab253bda0d9e874abcd988453c95f3ed849e617c34123c37c11a0604",
 	}
 
 	// purgeTimeout determines the maximum age of unused sub-directories.
@@ -116,6 +116,17 @@ func TestIntegration(t *testing.T) {
 			t.Fatalf("unformatted source files:\n%v", diff)
 		}
 	})
+	t.Run("GeneratedVet", func(t *testing.T) {
+		files := strings.Split(strings.TrimSpace(mustRunCommand(t, "go", "list", "./internal/testprotos/...")), "\n")
+		filtered := make([]string, 0, len(files))
+		for _, f := range files {
+			if strings.Contains(f, "/legacy/") {
+				continue
+			}
+			filtered = append(filtered, f)
+		}
+		mustRunCommand(t, append([]string{"go", "vet"}, filtered...)...)
+	})
 	t.Run("CopyrightHeaders", func(t *testing.T) {
 		files := strings.Split(strings.TrimSpace(mustRunCommand(t, "git", "ls-files", "*.go", "*.proto")), "\n")
 		mustHaveCopyrightHeader(t, files)
@@ -140,7 +151,7 @@ func TestIntegration(t *testing.T) {
 		}
 
 		runGo("Normal", command{}, "go", "test", "-race", "./...")
-		runGo("PureGo", command{}, "go", "test", "-race", "-tags", "purego", "./...")
+		runGo("LazyDecoding", command{}, "go", "test", "./proto", "-test_lazy_unmarshal")
 		runGo("Reflect", command{}, "go", "test", "-race", "-tags", "protoreflect", "./...")
 		if goVersion == golangLatest {
 			runGo("ProtoLegacyRace", command{}, "go", "test", "-race", "-tags", "protolegacy", "./...")

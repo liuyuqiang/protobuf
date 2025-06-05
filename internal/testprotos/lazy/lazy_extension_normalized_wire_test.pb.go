@@ -12,25 +12,23 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+	unsafe "unsafe"
 )
 
 type Sub struct {
-	state           protoimpl.MessageState
-	sizeCache       protoimpl.SizeCache
-	unknownFields   protoimpl.UnknownFields
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	C               *uint32                `protobuf:"varint,3,opt,name=c" json:"c,omitempty"`
+	Grandchild      *Sub                   `protobuf:"bytes,4,opt,name=grandchild" json:"grandchild,omitempty"`
 	extensionFields protoimpl.ExtensionFields
-
-	C          *uint32 `protobuf:"varint,3,opt,name=c" json:"c,omitempty"`
-	Grandchild *Sub    `protobuf:"bytes,4,opt,name=grandchild" json:"grandchild,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Sub) Reset() {
 	*x = Sub{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
+	mi := &file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
 }
 
 func (x *Sub) String() string {
@@ -41,7 +39,7 @@ func (*Sub) ProtoMessage() {}
 
 func (x *Sub) ProtoReflect() protoreflect.Message {
 	mi := &file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
+	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
@@ -71,21 +69,18 @@ func (x *Sub) GetGrandchild() *Sub {
 }
 
 type Top struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	A             *uint32                `protobuf:"varint,1,opt,name=a" json:"a,omitempty"`
+	Child         *Sub                   `protobuf:"bytes,2,opt,name=child" json:"child,omitempty"`
 	unknownFields protoimpl.UnknownFields
-
-	A     *uint32 `protobuf:"varint,1,opt,name=a" json:"a,omitempty"`
-	Child *Sub    `protobuf:"bytes,2,opt,name=child" json:"child,omitempty"`
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Top) Reset() {
 	*x = Top{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
+	mi := &file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
 }
 
 func (x *Top) String() string {
@@ -96,7 +91,7 @@ func (*Top) ProtoMessage() {}
 
 func (x *Top) ProtoReflect() protoreflect.Message {
 	mi := &file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
+	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
@@ -126,20 +121,17 @@ func (x *Top) GetChild() *Sub {
 }
 
 type Ext struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SomeFlag      *bool                  `protobuf:"varint,1,opt,name=some_flag,json=someFlag" json:"some_flag,omitempty"`
 	unknownFields protoimpl.UnknownFields
-
-	SomeFlag *bool `protobuf:"varint,1,opt,name=some_flag,json=someFlag" json:"some_flag,omitempty"`
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Ext) Reset() {
 	*x = Ext{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
+	mi := &file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
 }
 
 func (x *Ext) String() string {
@@ -150,7 +142,7 @@ func (*Ext) ProtoMessage() {}
 
 func (x *Ext) ProtoReflect() protoreflect.Message {
 	mi := &file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
+	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
@@ -191,48 +183,29 @@ var (
 
 var File_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto protoreflect.FileDescriptor
 
-var file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDesc = []byte{
-	0x0a, 0x42, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x6c, 0x61, 0x7a, 0x79, 0x2f, 0x6c, 0x61, 0x7a, 0x79, 0x5f,
-	0x65, 0x78, 0x74, 0x65, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6e, 0x6f, 0x72, 0x6d, 0x61, 0x6c,
-	0x69, 0x7a, 0x65, 0x64, 0x5f, 0x77, 0x69, 0x72, 0x65, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x23, 0x6c, 0x61, 0x7a, 0x79, 0x5f, 0x65, 0x78, 0x74, 0x65, 0x6e,
-	0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x65, 0x64, 0x5f,
-	0x77, 0x69, 0x72, 0x65, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x22, 0x63, 0x0a, 0x03, 0x53, 0x75, 0x62,
-	0x12, 0x0c, 0x0a, 0x01, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x01, 0x63, 0x12, 0x48,
-	0x0a, 0x0a, 0x67, 0x72, 0x61, 0x6e, 0x64, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x18, 0x04, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6c, 0x61, 0x7a, 0x79, 0x5f, 0x65, 0x78, 0x74, 0x65, 0x6e, 0x73,
-	0x69, 0x6f, 0x6e, 0x5f, 0x6e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x65, 0x64, 0x5f, 0x77,
-	0x69, 0x72, 0x65, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x75, 0x62, 0x52, 0x0a, 0x67, 0x72,
-	0x61, 0x6e, 0x64, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x2a, 0x04, 0x08, 0x02, 0x10, 0x03, 0x22, 0x53,
-	0x0a, 0x03, 0x54, 0x6f, 0x70, 0x12, 0x0c, 0x0a, 0x01, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d,
-	0x52, 0x01, 0x61, 0x12, 0x3e, 0x0a, 0x05, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6c, 0x61, 0x7a, 0x79, 0x5f, 0x65, 0x78, 0x74, 0x65, 0x6e, 0x73,
-	0x69, 0x6f, 0x6e, 0x5f, 0x6e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x65, 0x64, 0x5f, 0x77,
-	0x69, 0x72, 0x65, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x75, 0x62, 0x52, 0x05, 0x63, 0x68,
-	0x69, 0x6c, 0x64, 0x22, 0x84, 0x01, 0x0a, 0x03, 0x45, 0x78, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x73,
-	0x6f, 0x6d, 0x65, 0x5f, 0x66, 0x6c, 0x61, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08,
-	0x73, 0x6f, 0x6d, 0x65, 0x46, 0x6c, 0x61, 0x67, 0x32, 0x60, 0x0a, 0x01, 0x62, 0x12, 0x28, 0x2e,
-	0x6c, 0x61, 0x7a, 0x79, 0x5f, 0x65, 0x78, 0x74, 0x65, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6e,
-	0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x65, 0x64, 0x5f, 0x77, 0x69, 0x72, 0x65, 0x5f, 0x74,
-	0x65, 0x73, 0x74, 0x2e, 0x53, 0x75, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e,
-	0x6c, 0x61, 0x7a, 0x79, 0x5f, 0x65, 0x78, 0x74, 0x65, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6e,
-	0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x65, 0x64, 0x5f, 0x77, 0x69, 0x72, 0x65, 0x5f, 0x74,
-	0x65, 0x73, 0x74, 0x2e, 0x45, 0x78, 0x74, 0x52, 0x01, 0x62, 0x42, 0x35, 0x5a, 0x33, 0x67, 0x6f,
-	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x67, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2e, 0x6f, 0x72, 0x67, 0x2f,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61,
-	0x6c, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x6c, 0x61, 0x7a,
-	0x79,
-}
+const file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDesc = "" +
+	"\n" +
+	"Binternal/testprotos/lazy/lazy_extension_normalized_wire_test.proto\x12#lazy_extension_normalized_wire_test\"c\n" +
+	"\x03Sub\x12\f\n" +
+	"\x01c\x18\x03 \x01(\rR\x01c\x12H\n" +
+	"\n" +
+	"grandchild\x18\x04 \x01(\v2(.lazy_extension_normalized_wire_test.SubR\n" +
+	"grandchild*\x04\b\x02\x10\x03\"S\n" +
+	"\x03Top\x12\f\n" +
+	"\x01a\x18\x01 \x01(\rR\x01a\x12>\n" +
+	"\x05child\x18\x02 \x01(\v2(.lazy_extension_normalized_wire_test.SubR\x05child\"\x84\x01\n" +
+	"\x03Ext\x12\x1b\n" +
+	"\tsome_flag\x18\x01 \x01(\bR\bsomeFlag2`\n" +
+	"\x01b\x12(.lazy_extension_normalized_wire_test.Sub\x18\x02 \x01(\v2(.lazy_extension_normalized_wire_test.ExtR\x01bB5Z3google.golang.org/protobuf/internal/testprotos/lazy"
 
 var (
 	file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDescOnce sync.Once
-	file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDescData = file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDesc
+	file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDescData []byte
 )
 
 func file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDescGZIP() []byte {
 	file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDescOnce.Do(func() {
-		file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDescData = protoimpl.X.CompressGZIP(file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDescData)
+		file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDesc), len(file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDesc)))
 	})
 	return file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDescData
 }
@@ -260,51 +233,11 @@ func file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_ini
 	if File_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto != nil {
 		return
 	}
-	if !protoimpl.UnsafeEnabled {
-		file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[0].Exporter = func(v any, i int) any {
-			switch v := v.(*Sub); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			case 3:
-				return &v.extensionFields
-			default:
-				return nil
-			}
-		}
-		file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[1].Exporter = func(v any, i int) any {
-			switch v := v.(*Top); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_msgTypes[2].Exporter = func(v any, i int) any {
-			switch v := v.(*Ext); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDesc,
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDesc), len(file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 1,
@@ -316,7 +249,6 @@ func file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_ini
 		ExtensionInfos:    file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_extTypes,
 	}.Build()
 	File_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto = out.File
-	file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_rawDesc = nil
 	file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_goTypes = nil
 	file_internal_testprotos_lazy_lazy_extension_normalized_wire_test_proto_depIdxs = nil
 }

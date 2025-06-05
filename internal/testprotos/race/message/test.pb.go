@@ -12,24 +12,22 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+	unsafe "unsafe"
 )
 
 type MyMessage struct {
-	state           protoimpl.MessageState
-	sizeCache       protoimpl.SizeCache
-	unknownFields   protoimpl.UnknownFields
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	I32             *int32                 `protobuf:"varint,1,opt,name=i32" json:"i32,omitempty"`
 	extensionFields protoimpl.ExtensionFields
-
-	I32 *int32 `protobuf:"varint,1,opt,name=i32" json:"i32,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *MyMessage) Reset() {
 	*x = MyMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_testprotos_race_message_test_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
+	mi := &file_internal_testprotos_race_message_test_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
 }
 
 func (x *MyMessage) String() string {
@@ -40,7 +38,7 @@ func (*MyMessage) ProtoMessage() {}
 
 func (x *MyMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_internal_testprotos_race_message_test_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
+	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
@@ -64,29 +62,20 @@ func (x *MyMessage) GetI32() int32 {
 
 var File_internal_testprotos_race_message_test_proto protoreflect.FileDescriptor
 
-var file_internal_testprotos_race_message_test_proto_rawDesc = []byte{
-	0x0a, 0x2b, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x72, 0x61, 0x63, 0x65, 0x2f, 0x6d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x12, 0x67,
-	0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x74, 0x65, 0x73,
-	0x74, 0x22, 0x23, 0x0a, 0x09, 0x4d, 0x79, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x10,
-	0x0a, 0x03, 0x69, 0x33, 0x32, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x69, 0x33, 0x32,
-	0x2a, 0x04, 0x08, 0x02, 0x10, 0x03, 0x42, 0x3d, 0x5a, 0x3b, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
-	0x2e, 0x67, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2e, 0x6f, 0x72, 0x67, 0x2f, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x75, 0x66, 0x2f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x74, 0x65,
-	0x73, 0x74, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x72, 0x61, 0x63, 0x65, 0x2f, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x62, 0x08, 0x65, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x70,
-	0xe8, 0x07,
-}
+const file_internal_testprotos_race_message_test_proto_rawDesc = "" +
+	"\n" +
+	"+internal/testprotos/race/message/test.proto\x12\x12goproto.proto.test\"#\n" +
+	"\tMyMessage\x12\x10\n" +
+	"\x03i32\x18\x01 \x01(\x05R\x03i32*\x04\b\x02\x10\x03B=Z;google.golang.org/protobuf/internal/testprotos/race/messageb\beditionsp\xe8\a"
 
 var (
 	file_internal_testprotos_race_message_test_proto_rawDescOnce sync.Once
-	file_internal_testprotos_race_message_test_proto_rawDescData = file_internal_testprotos_race_message_test_proto_rawDesc
+	file_internal_testprotos_race_message_test_proto_rawDescData []byte
 )
 
 func file_internal_testprotos_race_message_test_proto_rawDescGZIP() []byte {
 	file_internal_testprotos_race_message_test_proto_rawDescOnce.Do(func() {
-		file_internal_testprotos_race_message_test_proto_rawDescData = protoimpl.X.CompressGZIP(file_internal_testprotos_race_message_test_proto_rawDescData)
+		file_internal_testprotos_race_message_test_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_internal_testprotos_race_message_test_proto_rawDesc), len(file_internal_testprotos_race_message_test_proto_rawDesc)))
 	})
 	return file_internal_testprotos_race_message_test_proto_rawDescData
 }
@@ -108,27 +97,11 @@ func file_internal_testprotos_race_message_test_proto_init() {
 	if File_internal_testprotos_race_message_test_proto != nil {
 		return
 	}
-	if !protoimpl.UnsafeEnabled {
-		file_internal_testprotos_race_message_test_proto_msgTypes[0].Exporter = func(v any, i int) any {
-			switch v := v.(*MyMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			case 3:
-				return &v.extensionFields
-			default:
-				return nil
-			}
-		}
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_internal_testprotos_race_message_test_proto_rawDesc,
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_internal_testprotos_race_message_test_proto_rawDesc), len(file_internal_testprotos_race_message_test_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 0,
@@ -139,7 +112,6 @@ func file_internal_testprotos_race_message_test_proto_init() {
 		MessageInfos:      file_internal_testprotos_race_message_test_proto_msgTypes,
 	}.Build()
 	File_internal_testprotos_race_message_test_proto = out.File
-	file_internal_testprotos_race_message_test_proto_rawDesc = nil
 	file_internal_testprotos_race_message_test_proto_goTypes = nil
 	file_internal_testprotos_race_message_test_proto_depIdxs = nil
 }

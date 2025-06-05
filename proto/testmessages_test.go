@@ -41,6 +41,13 @@ func makeMessages(in protobuild.Message, messages ...proto.Message) []proto.Mess
 			&testeditionspb.TestAllTypes{},
 		}
 	}
+
+	for _, m := range messages {
+		for _, mt := range relatedMessages[m.ProtoReflect().Type()] {
+			messages = append(messages, mt.New().Interface())
+		}
+	}
+
 	for _, m := range messages {
 		in.Build(m.ProtoReflect())
 	}
@@ -56,6 +63,13 @@ func templateMessages(messages ...proto.Message) []protoreflect.MessageType {
 			(*testeditionspb.TestAllTypes)(nil),
 		}
 	}
+
+	for _, m := range messages {
+		for _, mt := range relatedMessages[m.ProtoReflect().Type()] {
+			messages = append(messages, mt.New().Interface())
+		}
+	}
+
 	var out []protoreflect.MessageType
 	for _, m := range messages {
 		out = append(out, m.ProtoReflect().Type())
@@ -882,6 +896,14 @@ var testValidMessages = []testProto{
 			"oneof_uint32": 1111,
 		}, &testpb.TestAllTypes{}, &test3pb.TestAllTypes{}, &testeditionspb.TestAllTypes{}),
 		wire: protopack.Message{protopack.Tag{111, protopack.VarintType}, protopack.Varint(1111)}.Marshal(),
+	},
+
+	{
+		desc: "oneof with required message and uint32",
+		decodeTo: makeMessages(protobuild.Message{
+			"oneof_uint32": 1111,
+		}, &testpb.TestOneofWithRequired{}),
+		wire: protopack.Message{protopack.Tag{1, protopack.VarintType}, protopack.Varint(1111)}.Marshal(),
 	},
 
 	{

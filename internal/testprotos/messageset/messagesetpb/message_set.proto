@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-syntax = "proto2";
+edition = "2023";
 
 package goproto.proto.messageset;
 
@@ -15,5 +15,5 @@ message MessageSet {
 }
 
 message MessageSetContainer {
-  optional MessageSet message_set = 1;
+  MessageSet message_set = 1;
 }

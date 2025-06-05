@@ -13,23 +13,21 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+	unsafe "unsafe"
 )
 
 type OtherMessage struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	I32           *int32                 `protobuf:"varint,1,opt,name=i32" json:"i32,omitempty"`
 	unknownFields protoimpl.UnknownFields
-
-	I32 *int32 `protobuf:"varint,1,opt,name=i32" json:"i32,omitempty"`
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OtherMessage) Reset() {
 	*x = OtherMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_testprotos_race_extender_test_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
+	mi := &file_internal_testprotos_race_extender_test_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
 }
 
 func (x *OtherMessage) String() string {
@@ -40,7 +38,7 @@ func (*OtherMessage) ProtoMessage() {}
 
 func (x *OtherMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_internal_testprotos_race_extender_test_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
+	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
@@ -81,34 +79,21 @@ var (
 
 var File_internal_testprotos_race_extender_test_proto protoreflect.FileDescriptor
 
-var file_internal_testprotos_race_extender_test_proto_rawDesc = []byte{
-	0x0a, 0x2c, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x72, 0x61, 0x63, 0x65, 0x2f, 0x65, 0x78, 0x74, 0x65, 0x6e,
-	0x64, 0x65, 0x72, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x12,
-	0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x74, 0x65,
-	0x73, 0x74, 0x1a, 0x2b, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x74, 0x65, 0x73,
-	0x74, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x72, 0x61, 0x63, 0x65, 0x2f, 0x6d, 0x65, 0x73,
-	0x73, 0x61, 0x67, 0x65, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
-	0x20, 0x0a, 0x0c, 0x4f, 0x74, 0x68, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
-	0x10, 0x0a, 0x03, 0x69, 0x33, 0x32, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x69, 0x33,
-	0x32, 0x3a, 0x2b, 0x0a, 0x01, 0x73, 0x12, 0x1d, 0x2e, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x79, 0x4d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x01, 0x73, 0x42, 0x3e,
-	0x5a, 0x3c, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x67, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2e,
-	0x6f, 0x72, 0x67, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x69, 0x6e, 0x74,
-	0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73,
-	0x2f, 0x72, 0x61, 0x63, 0x65, 0x2f, 0x65, 0x78, 0x74, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x62, 0x08,
-	0x65, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x70, 0xe8, 0x07,
-}
+const file_internal_testprotos_race_extender_test_proto_rawDesc = "" +
+	"\n" +
+	",internal/testprotos/race/extender/test.proto\x12\x12goproto.proto.test\x1a+internal/testprotos/race/message/test.proto\" \n" +
+	"\fOtherMessage\x12\x10\n" +
+	"\x03i32\x18\x01 \x01(\x05R\x03i32:+\n" +
+	"\x01s\x12\x1d.goproto.proto.test.MyMessage\x18\x02 \x01(\tR\x01sB>Z<google.golang.org/protobuf/internal/testprotos/race/extenderb\beditionsp\xe8\a"
 
 var (
 	file_internal_testprotos_race_extender_test_proto_rawDescOnce sync.Once
-	file_internal_testprotos_race_extender_test_proto_rawDescData = file_internal_testprotos_race_extender_test_proto_rawDesc
+	file_internal_testprotos_race_extender_test_proto_rawDescData []byte
 )
 
 func file_internal_testprotos_race_extender_test_proto_rawDescGZIP() []byte {
 	file_internal_testprotos_race_extender_test_proto_rawDescOnce.Do(func() {
-		file_internal_testprotos_race_extender_test_proto_rawDescData = protoimpl.X.CompressGZIP(file_internal_testprotos_race_extender_test_proto_rawDescData)
+		file_internal_testprotos_race_extender_test_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_internal_testprotos_race_extender_test_proto_rawDesc), len(file_internal_testprotos_race_extender_test_proto_rawDesc)))
 	})
 	return file_internal_testprotos_race_extender_test_proto_rawDescData
 }
@@ -132,25 +117,11 @@ func file_internal_testprotos_race_extender_test_proto_init() {
 	if File_internal_testprotos_race_extender_test_proto != nil {
 		return
 	}
-	if !protoimpl.UnsafeEnabled {
-		file_internal_testprotos_race_extender_test_proto_msgTypes[0].Exporter = func(v any, i int) any {
-			switch v := v.(*OtherMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_internal_testprotos_race_extender_test_proto_rawDesc,
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_internal_testprotos_race_extender_test_proto_rawDesc), len(file_internal_testprotos_race_extender_test_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 1,
@@ -162,7 +133,6 @@ func file_internal_testprotos_race_extender_test_proto_init() {
 		ExtensionInfos:    file_internal_testprotos_race_extender_test_proto_extTypes,
 	}.Build()
 	File_internal_testprotos_race_extender_test_proto = out.File
-	file_internal_testprotos_race_extender_test_proto_rawDesc = nil
 	file_internal_testprotos_race_extender_test_proto_goTypes = nil
 	file_internal_testprotos_race_extender_test_proto_depIdxs = nil
 }
