@@ -15,6 +15,9 @@ import (
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/extensions/extra"
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/extensions/proto3"
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/fieldnames"
+	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/import_option"
+	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/import_option_custom"
+	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/import_option_unlinked"
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/import_public"
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/import_public/sub"
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/import_public/sub2"
@@ -30,4 +33,5 @@ import (
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/proto3"
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/protoeditions"
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/retention"
+	_ "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/visibility"
 )
